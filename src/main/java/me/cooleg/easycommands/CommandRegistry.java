@@ -51,7 +51,7 @@ public class CommandRegistry {
             method.setAccessible(true);
             SubCommand[] annotations = method.getAnnotationsByType(SubCommand.class);
             for (SubCommand subCommand : annotations) {
-                commands.put(subCommand.value().toLowerCase(), method);
+                commands.put(subCommand.value().toLowerCase().trim() + " ", method);
             }
         }
 
@@ -61,8 +61,9 @@ public class CommandRegistry {
                 if (args.length == 0) {return command.rootCommand(commandSender, alias);}
                 StringBuilder matchString = new StringBuilder();
                 for (String s : args) {
-                    if (matchString.length() > 0) {matchString.append(" ");}
                     matchString.append(s);
+
+                    matchString.append(" ");
                 }
 
                 Method longestMatch = null;
