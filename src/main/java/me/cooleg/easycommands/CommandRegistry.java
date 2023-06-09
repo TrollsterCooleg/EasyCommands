@@ -5,15 +5,20 @@ import me.cooleg.easycommands.commandmeta.SubCommand;
 import me.cooleg.easycommands.commandmeta.SubCommands;
 import me.cooleg.easycommands.exceptions.RegistryCreationFailedException;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandRegistry {
 
@@ -84,6 +89,33 @@ public class CommandRegistry {
                     return false;
                 }
 
+            }
+
+            @Nonnull
+            @Override
+            public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
+                ArrayList<String> complete = new ArrayList<>();
+
+                for (String s : commands.keySet()) {
+                    String[] items = s.split(" ");
+                    int i;
+                    if (args.length > items.length) {continue;}
+                    for (i = 0; i < args.length-1; i++) {
+                        if (!items[i].equals(args[i])) {break;}
+                    }
+                    if (args.length-1 == i) {
+                        complete.add(items[args.length-1]);
+                    }
+                }
+
+                if (complete.size() == 0) {return Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList());}
+                return complete;
+            }
+
+            @Nonnull
+            @Override
+            public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
+                return tabComplete(sender, alias, args);
             }
         }.initialize(command.name(), command.description(), command.usage(), command.aliases());
 
