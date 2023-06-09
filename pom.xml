@@ -38,14 +38,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <filters>
-                                <filter>
-                                    <artifact>*</artifact>
-                                    <exludes>
-                                        <exclude>META-INF/MANIFEST.MF</exclude>
-                                    </exludes>
-                                </filter>
-                            </filters>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
