@@ -12,8 +12,8 @@ public interface Command {
 
 
     @Nonnull String name();
-    String description();
-    String usage();
-    List<String> aliases();
+    default String description() {return null;}
+    default String usage() {return null;}
+    default List<String> aliases() {return null;};
 
 }
