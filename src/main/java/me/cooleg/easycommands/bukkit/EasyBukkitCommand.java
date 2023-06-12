@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EasyBukkitCommand extends Command {
 
@@ -15,7 +16,7 @@ public class EasyBukkitCommand extends Command {
     }
 
     public EasyBukkitCommand initialize(@Nonnull String name, @Nullable String permission, @Nullable String permissionMessage, @Nullable String description, @Nullable String usageMessage, @Nullable List<String> aliases) {
-        setName(name);
+        setName(name.toLowerCase());
         if (description != null) {
             setDescription(description);
         }
@@ -23,10 +24,10 @@ public class EasyBukkitCommand extends Command {
             setUsage(usageMessage);
         }
         if (aliases != null) {
-            setAliases(aliases);
+            setAliases(aliases.stream().map(String::toLowerCase).collect(Collectors.toList()));
         }
         if (permission != null) {
-            setPermission(permission);
+            setPermission(permission.toLowerCase());
         }
         if (permissionMessage != null) {
             setPermissionMessage(permissionMessage);
