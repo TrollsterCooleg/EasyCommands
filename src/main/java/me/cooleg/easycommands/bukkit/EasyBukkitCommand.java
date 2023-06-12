@@ -14,7 +14,7 @@ public class EasyBukkitCommand extends Command {
         super("placeholdercommandname");
     }
 
-    public EasyBukkitCommand initialize(@Nonnull String name, @Nullable String description, @Nullable String usageMessage, @Nullable List<String> aliases) {
+    public EasyBukkitCommand initialize(@Nonnull String name, @Nullable String permission, @Nullable String permissionMessage, @Nullable String description, @Nullable String usageMessage, @Nullable List<String> aliases) {
         setName(name);
         if (description != null) {
             setDescription(description);
@@ -25,6 +25,13 @@ public class EasyBukkitCommand extends Command {
         if (aliases != null) {
             setAliases(aliases);
         }
+        if (permission != null) {
+            setPermission(permission);
+        }
+        if (permissionMessage != null) {
+            setPermissionMessage(permissionMessage);
+        }
+
 
         return this;
     }

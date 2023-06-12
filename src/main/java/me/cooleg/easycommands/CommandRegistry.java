@@ -117,7 +117,7 @@ public class CommandRegistry {
             public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException {
                 return tabComplete(sender, alias, args);
             }
-        }.initialize(command.name(), command.description(), command.usage(), command.aliases());
+        }.initialize(command.name(), command.permission(), command.permissionMessage(), command.description(), command.usage(), command.aliases());
 
         commandMap.register(command.name(), bukkitCommand);
     }
