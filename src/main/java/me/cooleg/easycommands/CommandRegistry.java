@@ -77,7 +77,7 @@ public class CommandRegistry {
                 method.setAccessible(true);
                 TabCompleter[] annotations = method.getAnnotationsByType(TabCompleter.class);
                 for (TabCompleter tabCompleter : annotations) {
-                    commands.put(tabCompleter.value().toLowerCase().trim() + " ", method);
+                    completes.put(tabCompleter.value().toLowerCase().trim() + " ", method);
                 }
             }
         }
