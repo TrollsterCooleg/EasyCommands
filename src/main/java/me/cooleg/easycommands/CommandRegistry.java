@@ -137,9 +137,11 @@ public class CommandRegistry {
                     }
 
                     if (longestMatch == null) {complete.addAll(command.rootTabComplete(commandSender, alias, args));}
-                    try {
-                        complete.addAll((Collection<? extends String>) longestMatch.invoke(command, commandSender, alias, args));
-                    } catch (IllegalAccessException | InvocationTargetException | ClassCastException ignored) {}
+                    else {
+                        try {
+                            complete.addAll((Collection<? extends String>) longestMatch.invoke(command, commandSender, alias, args));
+                        } catch (IllegalAccessException | InvocationTargetException | ClassCastException ignored) {}
+                    }
                 }
 
                 for (String s : commands.keySet()) {
