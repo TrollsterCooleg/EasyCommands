@@ -131,6 +131,7 @@ public class CommandRegistry {
                     String argString = matchString.toString().toLowerCase();
                     for (String s : completes.keySet()) {
                         if (s.length() <= longestLength) {continue;}
+                        if (s.split(" ").length != args.length) {continue;}
                         if (!argString.startsWith(s)) {continue;}
                         longestMatch = completes.get(s);
                         longestLength = s.length();
